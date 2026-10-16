@@ -12,7 +12,7 @@ public class Task {
     private boolean completed;
 
     //Constructor
-    public Task(PriorityLevel priority, String tname, String sdesc, boolean complete){
+    public Task(String tname,PriorityLevel priority, String sdesc, boolean complete){
 
 
         this.taskName = tname;
@@ -27,15 +27,19 @@ public class Task {
     //Setters
 
     public void setTaskName(String taskName){
+
         this.taskName = taskName;
     }
     public void setPriority(PriorityLevel priority){
+
         this.priority = priority;
     }
     public void setCompleted(boolean completed){
+
         this.completed = completed;
     }
     public void setShortDesc(String shortDesc){
+
         this.shortDesc = shortDesc;
     }
 
@@ -43,9 +47,12 @@ public class Task {
 
 
     public String getTaskName(){
+
         return taskName;
     }
+
     public PriorityLevel getPriority(){
+
         return priority;
     }
     public boolean getCompleted(){
