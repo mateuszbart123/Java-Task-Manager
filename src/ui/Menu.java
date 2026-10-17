@@ -18,7 +18,7 @@ public class Menu {
        while (menuOption != 4) {
            menuOption = JOptionPane.showOptionDialog(
                    null,
-                   "Which action do you wish to complete",
+                   "Which action do you wish to complete:",
                    "Task Manager",
                    JOptionPane.DEFAULT_OPTION,
                    JOptionPane.INFORMATION_MESSAGE,
@@ -39,7 +39,7 @@ public class Menu {
                    editTask();
                    break;
                case 3:
-                   System.out.println("removing");
+                   removeTask();
                    break;
                case 4:
                    System.exit(-1);
@@ -97,7 +97,7 @@ public class Menu {
    public void editTask(){
         String displayTaskNames = "";
         if(tasks.isEmpty()){
-            JOptionPane.showMessageDialog(null,"No tasks created");
+            JOptionPane.showMessageDialog(null,"No tasks created.");
             return;
         }
         for(int a = 0; a < tasks.size(); a++){
@@ -108,7 +108,7 @@ public class Menu {
         String pickTask = JOptionPane.showInputDialog(null,"Enter task number:\n\n " + displayTaskNames);
 
         if(pickTask == null || pickTask.isEmpty()){
-            JOptionPane.showMessageDialog(null,"Doesn't exist(enter valid number)");
+            JOptionPane.showMessageDialog(null,"Doesn't exist (enter a valid number)");
             return;
         }
 
@@ -118,12 +118,12 @@ public class Menu {
             pickTaskInt = Integer.parseInt(pickTask);
         }
         catch (NumberFormatException e){
-            JOptionPane.showMessageDialog(null, "Enter a valid number");
+            JOptionPane.showMessageDialog(null, "Enter a valid number.");
             return;
         }
 
         if(pickTaskInt < 1 || pickTaskInt > tasks.size()){
-            JOptionPane.showMessageDialog(null, "Enter a valid number");
+            JOptionPane.showMessageDialog(null, "Enter a valid number.");
             return;
         }
 
@@ -152,7 +152,7 @@ public class Menu {
                 break;
             case 1:
                 int priorityIndex = JOptionPane.showOptionDialog(null,
-                        "Set the priority Level",
+                        "Set the priority Level:",
                         "Priority",
                         JOptionPane.DEFAULT_OPTION,
                         JOptionPane.INFORMATION_MESSAGE,
@@ -168,7 +168,7 @@ public class Menu {
             case 2:
                 String newDesc = JOptionPane.showInputDialog(null,"New description: ");
                 if(newDesc == null || newDesc.isEmpty()){
-                    JOptionPane.showMessageDialog(null,"Empty Desc error");
+                    JOptionPane.showMessageDialog(null,"Empty Desc error.");
                     return;
                 }
                 tasks.get(pickTaskInt).setShortDesc(newDesc);
@@ -199,6 +199,59 @@ public class Menu {
             default:
                 return;
 
+        }
+    }
+    public void removeTask(){
+
+        String displayTaskNames = "";
+        if(tasks.isEmpty()){
+            JOptionPane.showMessageDialog(null,"No tasks created.");
+            return;
+        }
+        for(int a = 0; a < tasks.size(); a++){
+            displayTaskNames += "task " + (a + 1) + ": " + tasks.get(a).getTaskName() + "\n ";
+
+        }
+
+        String pickTask = JOptionPane.showInputDialog(null,"Enter task number:\n\n " + displayTaskNames);
+
+        if(pickTask == null || pickTask.isEmpty()){
+            JOptionPane.showMessageDialog(null,"Doesn't exist (enter a valid number)");
+            return;
+        }
+
+        int pickTaskInt = 0;
+
+        try {
+            pickTaskInt = Integer.parseInt(pickTask);
+        }
+        catch (NumberFormatException e){
+            JOptionPane.showMessageDialog(null, "Enter a valid number.");
+            return;
+        }
+
+        if(pickTaskInt < 1 || pickTaskInt > tasks.size()){
+            JOptionPane.showMessageDialog(null, "Enter a valid number.");
+            return;
+        }
+
+        pickTaskInt = pickTaskInt - 1;
+
+        boolean confirmTrue = false;
+        String confirmSet[] = {"Yes", "No"};
+        int confirmIndex = JOptionPane.showOptionDialog(null,
+                "Are you sure you want to remove the task:",
+                "Confirmation",
+                JOptionPane.DEFAULT_OPTION,
+                JOptionPane.INFORMATION_MESSAGE,
+                null,
+                confirmSet,
+                null);
+        if (confirmIndex < 0) {
+            return;
+        }
+        else if (confirmIndex == 0) {
+            tasks.remove(pickTaskInt);
         }
     }
 }
