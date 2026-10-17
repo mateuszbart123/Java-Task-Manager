@@ -3,11 +3,12 @@ package ui;
 import model.Task;
 
 import javax.swing.*;
+import java.awt.*;
 import java.util.ArrayList;
 
 public class Menu {
 
-    ArrayList<Object> tasks = new ArrayList<>();
+    private ArrayList<Task> tasks = new ArrayList<>();
 
     public void mainMenu() {
 
@@ -29,7 +30,7 @@ public class Menu {
 
            switch (menuOption) {
                case 0:
-                   System.out.println("viewing");
+                   viewTasks();
                    break;
                case 1:
                    createTask();
@@ -47,7 +48,26 @@ public class Menu {
            }
        }
    }
+    public void viewTasks(){
+        TextArea textArea = new TextArea(30,40);
+        Font textAreaFont = new Font("monospaced",Font.PLAIN,12);
+        textArea.setFont(textAreaFont);
+        String data = "";
+        if(tasks.isEmpty()){
+            JOptionPane.showMessageDialog(null,"No tasks created.");
+            return;
+        }
+        for(int a = 0; a < tasks.size(); a++){
+            data += "Task: " + (a + 1) + "\n";
+            data += "Name: " + tasks.get(a).getTaskName() + "\n";
+            data += "Priority: " + tasks.get(a).getPriority() + "\n";
+            data += "Short Description: " + tasks.get(a).getShortDesc() + "\n";
+            data += "Completed: " + tasks.get(a).getCompleted() + "\n\n";
 
+        }
+        textArea.append(data);
+        JOptionPane.showMessageDialog(null,textArea);
+    }
    public void createTask(){
        String taskNames = JOptionPane.showInputDialog(null,"What is the name of your task:");
        if(taskNames == null || taskNames.isEmpty()){
@@ -73,6 +93,6 @@ public class Menu {
        Task newtask = new Task(taskNames,priorityValue,taskDesc,false);
        tasks.add(newtask);
        System.out.println(tasks.size());
-   }
+    }
 
 }
