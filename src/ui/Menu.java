@@ -1,7 +1,6 @@
 package ui;
 
 import model.Task;
-
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
@@ -13,10 +12,22 @@ public class Menu {
     private ArrayList<Task> tasks = new ArrayList<>();
     private TaskDAO taskDAO = new TaskDAO();
 
+
+
     public void mainMenu() {
 
        String choice[] = {"View", "Create", "Edit", "Remove", "Exit"};
        int menuOption = 0;
+
+       // grabs all tasks from database before menu loop to save sessions
+        try{
+            tasks.addAll(taskDAO.getAllTasks());
+        }
+        catch(SQLException e){
+            JOptionPane.showMessageDialog(null,"Could not load database");
+            e.printStackTrace();
+        }
+
 
        while (menuOption != 4) {
            menuOption = JOptionPane.showOptionDialog(
