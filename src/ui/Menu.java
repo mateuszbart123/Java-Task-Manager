@@ -5,10 +5,13 @@ import model.Task;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
+import database.TaskDAO;
+import java.sql.SQLException;
 
 public class Menu {
 
     private ArrayList<Task> tasks = new ArrayList<>();
+    private TaskDAO taskDAO = new TaskDAO();
 
     public void mainMenu() {
 
@@ -91,7 +94,18 @@ public class Menu {
        Task.PriorityLevel priorityValue = Task.PriorityLevel.values()[priorityIndex];
 
        Task newtask = new Task(taskNames, priorityValue, taskDesc, false);
-       tasks.add(newtask);
+
+       try {
+           taskDAO.saveTask(newtask);
+           tasks.add(newtask);
+
+           JOptionPane.showMessageDialog(null,"Task created!");
+       }
+       catch (SQLException e){
+           JOptionPane.showMessageDialog(null,"Failed to save to database");
+           e.printStackTrace();
+       }
+
 
    }
    public void editTask(){

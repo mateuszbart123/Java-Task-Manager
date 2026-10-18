@@ -1,4 +1,3 @@
-import model.Task;
 import ui.Menu;
 
 public class Main {
@@ -6,6 +5,5 @@ public class Main {
 
         Menu menu = new Menu();
         menu.mainMenu();
-
     }
 }
