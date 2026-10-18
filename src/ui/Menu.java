@@ -103,8 +103,9 @@ public class Menu {
            return;
        }
        Task.PriorityLevel priorityValue = Task.PriorityLevel.values()[priorityIndex];
+       int taskId = 0;
 
-       Task newtask = new Task(taskNames, priorityValue, taskDesc, false);
+       Task newtask = new Task(taskId,taskNames, priorityValue, taskDesc, false);
 
        try {
            taskDAO.saveTask(newtask);
@@ -272,11 +273,20 @@ public class Menu {
                 null,
                 confirmSet,
                 null);
-        if (confirmIndex < 0) {
+
+        if(confirmIndex < 0 || confirmIndex == 1){
             return;
         }
-        else if (confirmIndex == 0) {
+        try {
+            Task selectedTask = tasks.get(pickTaskInt);
+            taskDAO.deleteTask(selectedTask);
             tasks.remove(pickTaskInt);
+
+            JOptionPane.showMessageDialog(null,"Tasks deleted");
+
+        } catch (SQLException e) {
+           JOptionPane.showMessageDialog(null,"Task deleted error");
+           e.printStackTrace();
         }
     }
 }

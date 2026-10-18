@@ -6,15 +6,16 @@ public class Task {
         HIGH, MEDIUM, LOW
     }
 
+    private int taskId;
     private String taskName;
     private PriorityLevel priority;
     private String shortDesc;
     private boolean completed;
 
     //Constructor
-    public Task(String tname,PriorityLevel priority, String sdesc, boolean complete){
+    public Task(Integer id,String tname,PriorityLevel priority, String sdesc, boolean complete){
 
-
+        this.taskId = id;
         this.taskName = tname;
         this.priority = priority;
         this.shortDesc = sdesc;
@@ -42,6 +43,9 @@ public class Task {
 
         this.shortDesc = shortDesc;
     }
+    public void setTaskId(int taskId){
+        this.taskId = taskId;
+    }
 
     //getters
 
@@ -60,6 +64,9 @@ public class Task {
     }
     public String getShortDesc(){
         return shortDesc;
+    }
+    public int getTaskId(){
+        return taskId;
     }
 
 }
