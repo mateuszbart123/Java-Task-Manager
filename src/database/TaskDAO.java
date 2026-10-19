@@ -58,19 +58,36 @@ public class TaskDAO {
 
 
 
-    public void deleteTask(Task task) throws SQLException{
-            String sql = "DELETE FROM Tasks WHERE task_id = ?";
+    public void deleteTask(Task task) throws SQLException {
+        String sql = "DELETE FROM Tasks WHERE task_id = ?";
 
-            try (Connection connection = DatabaseConnection.getConnection();
-            PreparedStatement statement = connection.prepareStatement(sql)){
+        try (Connection connection = DatabaseConnection.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
 
-                statement.setInt(1,task.getTaskId());
+            statement.setInt(1, task.getTaskId());
 
-                statement.executeUpdate();
-            }
+            statement.executeUpdate();
+        }
 
 
     }
 
+    public void updateTask(Task task) throws SQLException{
+        String sql = "UPDATE Tasks SET task_name = ?, task_desc = ?, task_complete = ?" +
+                ", task_priority = ? WHERE task_id = ?";
+
+        try(Connection connection = DatabaseConnection.getConnection();
+        PreparedStatement statement = connection.prepareStatement(sql)){
+            statement.setString(1, task.getTaskName());
+            statement.setString(2, task.getShortDesc());
+            statement.setBoolean(3, task.getCompleted());
+            statement.setString(4, task.getPriority().name());
+            statement.setInt(5, task.getTaskId());
+
+            statement.executeUpdate();
+
+        }
+
+    }
 
 }

@@ -165,12 +165,12 @@ public class Menu {
                editChoice,
                 null);
 
-
-        switch (chosen){
+       Task selectedTask = tasks.get(pickTaskInt);
+        switch (chosen) {
             case 0:
-                String newName = JOptionPane.showInputDialog(null,"New name: ");
-                if(newName == null || newName.isEmpty()){
-                    JOptionPane.showMessageDialog(null,"Empty Name error");
+                String newName = JOptionPane.showInputDialog(null, "New name: ");
+                if (newName == null || newName.isEmpty()) {
+                    JOptionPane.showMessageDialog(null, "Empty Name error");
                     return;
                 }
                 tasks.get(pickTaskInt).setTaskName(newName);
@@ -190,11 +190,12 @@ public class Menu {
                 }
                 Task.PriorityLevel priorityValue = Task.PriorityLevel.values()[priorityIndex];
                 tasks.get(pickTaskInt).setPriority(priorityValue);
+
                 break;
             case 2:
-                String newDesc = JOptionPane.showInputDialog(null,"New description: ");
-                if(newDesc == null || newDesc.isEmpty()){
-                    JOptionPane.showMessageDialog(null,"Empty Desc error.");
+                String newDesc = JOptionPane.showInputDialog(null, "New description: ");
+                if (newDesc == null || newDesc.isEmpty()) {
+                    JOptionPane.showMessageDialog(null, "Empty Desc error.");
                     return;
                 }
                 tasks.get(pickTaskInt).setShortDesc(newDesc);
@@ -213,11 +214,9 @@ public class Menu {
                         null);
                 if (completeIndex < 0) {
                     return;
-                }
-                else if (completeIndex == 0) {
+                } else if (completeIndex == 0) {
                     completeTrue = true;
-                }
-                else {
+                } else {
                     completeTrue = false;
                 }
                 tasks.get(pickTaskInt).setCompleted(completeTrue);
@@ -226,6 +225,13 @@ public class Menu {
                 return;
 
         }
+       try {
+           taskDAO.updateTask(selectedTask);
+       }
+       catch (SQLException e){
+           JOptionPane.showMessageDialog(null,"not updated.");
+           e.printStackTrace();
+       }
     }
     public void removeTask(){
 
