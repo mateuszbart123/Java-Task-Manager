@@ -69,7 +69,7 @@ The connector is included as a zip in this repository.
 4. Apply the changes. The driver is now configured.
 
 ## Running the project
-1. Open the project in IntelliJ IDEA.
+1. Open the project folder in IntelliJ IDEA.
 2. Make sure MySQL Server is running and the database has been created.
 3. Check that the MySQL Connector/J driver is added to the project.
 4. Configure the DB_USER and DB_PASSWORD environment variables in the run configuration.
