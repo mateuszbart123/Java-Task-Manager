@@ -29,7 +29,7 @@ This project isn't a maven build but a standard IntelliJ Java project.
 ## Database Setup
 ### 1. Start MySQL
 
-Make sure MySQL server is installed from https://dev.mysql.com/downloads/mysql/ and running on your computer.
+Make sure MySQL server v8.0 is installed from https://dev.mysql.com/downloads/mysql/ and running on your computer.
 During Installation configure your MySQL root password or create a separate database user.
 
 The default connection settings used are:
