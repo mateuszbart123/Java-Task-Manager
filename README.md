@@ -52,11 +52,12 @@ The application reads database credentials from environment varaiables, keeping 
 In IntelliJ IDEA: 
 
 1. Open Run -> Edit Configurations.
-2. Select the configuration used to run Main.
-3. Add environment variables, using your own MySQL credentials:
+2. Add new configuration -> application
+3. Main class -> Main (default package) -> apply
+5. Edit environment variables, using your own MySQL credentials:
    - DB_USER --- your MySQL username
    - DB_PASSWORD --- your MySQL password
-4. Apply the changes and save the configuration.
+6. Apply the changes and save the configuration.
 
 ## MySQL Connector/J Setup
 
